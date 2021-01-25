@@ -99,6 +99,27 @@
 .PhotoDetail .scrollHint svg.img3 {
   animation-delay: 400ms;
 }
+.prev {
+  height: 100%;
+  width: 150px;
+  background-color: aqua;
+  position: absolute;
+  left: 20px;
+}
+.next {
+  height: 100%;
+  width: 150px;
+  background-color: greenyellow;
+  position: absolute;
+  right: 20px;
+}
+.imageContainer {
+  width: 100%;
+  height: 33%;
+  position: relative;
+  top: 33%;
+  z-index: 10;
+}
 
 /* When two boxes can no longer fit next to each other */
 @media all and (max-width: 500px) {

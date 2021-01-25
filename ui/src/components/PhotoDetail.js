@@ -11,11 +11,14 @@ import { useMutation} from '@apollo/react-hooks';
 
 import { ReactComponent as CloseIcon } from '../static/images/close.svg'
 import { ReactComponent as ArrowDownIcon } from '../static/images/arrow_down.svg'
+import { ReactComponent as PrevIcon } from '../static/images/prev.svg'
+import { ReactComponent as NextIcon } from '../static/images/next.svg'
 import '../static/css/PhotoDetail.css'
 
 
 const PhotoDetail = ({ photoId, photo }) => {
   const [starRating,updateStarRating] = useState(photo.starRating)
+  const [display, setDisplay] = useState({prev: 1, next: 0})
   const [updatePhoto] = useMutation(PHOTO_UPDATE)
   useEffect (() => {
     updateStarRating(photo.starRating)
@@ -63,8 +66,30 @@ const PhotoDetail = ({ photoId, photo }) => {
     var date = new Date(photo.takenAt)
     date = new Intl.DateTimeFormat().format(date)
   }
+  const showArrow = (type) => {
+    console.log('show')
+    display[type] = 1
+    console.log(display)
+    setDisplay(display)
+  }
+
+  const hideArrow = (type) => {
+    console.log('hide')
+    display[type] = 0
+    console.log(display)
+    setDisplay(display)
+  }
+
+  useEffect(() => {
+
+  }, [display])
+
   return (
     <div className="PhotoDetail" style={{backgroundImage: `url('/thumbnails/3840x3840_contain_q75/${photoId}/')`}}>
+      <div className="imageContainer">
+        <div className="prev" onMouseEnter={() => showArrow('prev')} onMouseLeave={() => hideArrow('prev')} style={{opacity: `${display.prev}`}}><PrevIcon/></div>
+        <div className="next" onMouseEnter={() => showArrow('next')} onMouseLeave={() => hideArrow('next')} style={{opacity: `${display['next']}`}}><NextIcon/></div>
+      </div>
       <div className="content">
         <div className="metadata">
           <div className="boxes">
